@@ -39,3 +39,5 @@ export function vote(state, entry){
     tally => tally + 1
   );
 }
+
+export const INITAL_STATE = Map();
