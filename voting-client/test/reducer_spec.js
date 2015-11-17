@@ -22,7 +22,6 @@ describe('reducer', () => {
         tally: {Trainspotting: 1},
       },
     }));
-  
   });
 
   it('handles SET_STATE with plain JS payload', () => {
