@@ -1,17 +1,29 @@
 import React from 'react';
-import Router, {Route, DefaultRoute} from 'react-router';
+import ReactDOM from 'react-dom';
+import Router, {Route} from 'react-router';
+import {createStore} from 'redux';
+import reducer from './reducer';
 import App from './components/App';
 import Voting from './components/Voting';
 import Results from './components/Results';
 
-const routes = <Route handler={App}>
-  <Route path="/results" handler={Results} />
-  <DefaultRoute handler={Voting} />
+const store = createStore(reducer);
+store.dispatch({
+  type: 'SET_STATE',
+  state: {
+    vote: {
+      pair: ['Sunshine', '28 Days Later'],
+      tally: {Sunshine: 2},
+    },
+  },
+});
+
+const routes = <Route component={App}>
+  <Route path="/results" component={Results} />
+  <Route pat="/" component={Voting} />
 </Route>;
 
-Router.run(routes, (Root) => {
-  React.render(
-    <Root />,
-    document.getElementById('app')
-  );
-});
+ReactDOM.render(
+  <Router>{routes}</Router>,
+  document.getElementById('app')
+);
